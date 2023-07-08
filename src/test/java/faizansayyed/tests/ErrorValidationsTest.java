@@ -1,6 +1,7 @@
 package faizansayyed.tests;
 
 import org.testng.annotations.Test;
+
 import org.testng.AssertJUnit;
 import java.io.IOException;
 import java.util.List;
@@ -10,13 +11,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import faizansayyed.TestComponents.BaseTest;
+import faizansayyed.TestComponents.Retry;
 import faizansayyed.pageobjects.CartPage;
 import faizansayyed.pageobjects.ConfirmationPage;
 import faizansayyed.pageobjects.ProductCatalogue;
 
 public class ErrorValidationsTest extends BaseTest {
 
-	@Test(groups= {"ErrorHandling"})
+	@Test(groups = { "ErrorHandling" }, retryAnalyzer = Retry.class)
 	public void LoginErrorValidation() throws IOException, InterruptedException {
 
 		landingPage.loginApplication("faizansayyed9a99@gmail.com", "FAizan@999");

@@ -32,7 +32,7 @@ public class BaseTest {
 
 		Properties props = new Properties();
 		FileInputStream fis = new FileInputStream(
-				System.getProperty("user.dir") + "\\src\\test\\java\\faizansayyed\\resources\\GlobalData.properties");
+				System.getProperty("user.dir") + "\\src\\main\\java\\faizansayyed\\resources\\GlobalData.properties");
 		props.load(fis);
 		String browserName = props.getProperty("browser");
 		if (browserName.equalsIgnoreCase("chrome")) {
