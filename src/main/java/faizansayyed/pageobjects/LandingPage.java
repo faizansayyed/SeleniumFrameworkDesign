@@ -28,6 +28,9 @@ public class LandingPage extends AbstractComponents {
 	@FindBy(name = "login")
 	WebElement submit;
 
+	@FindBy(css = "[class*='flyInOut']")
+	WebElement errorMessage;
+
 	public void goTo() {
 		driver.get("https://rahulshettyacademy.com/client");
 	}
@@ -38,6 +41,11 @@ public class LandingPage extends AbstractComponents {
 		submit.click();
 
 		return new ProductCatalogue(driver);
+	}
+
+	public String getErrorMessage() {
+		waitForWebElementToAppear(errorMessage);
+		return errorMessage.getText();
 	}
 
 }

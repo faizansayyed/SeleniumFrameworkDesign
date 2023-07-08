@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import faizansayyed.pageobjects.CartPage;
 import faizansayyed.pageobjects.CheckOutPage;
+import faizansayyed.pageobjects.OrderPage;
 
 public class AbstractComponents {
 
@@ -28,6 +29,9 @@ public class AbstractComponents {
 	@FindBy(css = ".totalRow button")
 	WebElement checkOutBtn;
 
+	@FindBy(css = "[routerlink*='myorders']")
+	WebElement orderHeader;
+
 	public void waitForElementToAppear(By findBy) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
@@ -38,6 +42,13 @@ public class AbstractComponents {
 		wait.until(ExpectedConditions.invisibilityOf(ele));
 	}
 
+	public void waitForWebElementToAppear(WebElement findBy) {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(findBy));
+
+	}
+
 	public CartPage gotToCartPage() {
 		routerlink.click(); // by xpath
 		return new CartPage(driver);
@@ -46,5 +57,11 @@ public class AbstractComponents {
 	public CheckOutPage gotToCheckoutPage() {
 		checkOutBtn.click(); // by class
 		return new CheckOutPage(driver);
+	}
+
+	public OrderPage goToOrdersPage() {
+		orderHeader.click();
+		OrderPage orderPage = new OrderPage(driver);
+		return orderPage;
 	}
 }
