@@ -29,6 +29,7 @@ public class ProductCatalogue extends AbstractComponents {
 
 	By productsBy = By.cssSelector(".mb-3");
 	By toastContainer = By.cssSelector("#toast-container");
+	By addToCart = By.cssSelector(".card-body button:last-of-type");
 
 	public List<WebElement> getProductList() {
 		waitForElementToAppear(productsBy);
@@ -36,15 +37,15 @@ public class ProductCatalogue extends AbstractComponents {
 	}
 
 	public WebElement getProductByName(String productName) {
-		WebElement filteredProduct = getProductList().stream().filter(
-				product -> product.findElement(By.cssSelector(".card .card-body h5 b")).getText().contains(productName))
-				.findFirst().orElse(null);
-
-		return filteredProduct;
+		WebElement prod = getProductList().stream()
+				.filter(product -> product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst()
+				.orElse(null);
+		return prod;
 	}
 
 	public void addProductToCart(String productName) {
-		getProductByName(productName).findElement(By.xpath("(//button[contains(text(),'Add To Cart')])[1]")).click();
+		WebElement prod = getProductByName(productName);
+		prod.findElement(addToCart).click();
 		waitForElementToAppear(toastContainer);
 		waitUntilDisappear(spinner);
 	}
